@@ -61,7 +61,13 @@ module.exports = {
 					MiniCssExtractPlugin.loader, // 'style-loader',
 					'css-loader',
 					'postcss-loader',
-					'less-loader'
+					'less-loader',
+					{
+						loader: 'style-resources-loader',
+						options: {
+							patterns: path.resolve(__dirname, '../src/theme/css/global.less')
+						}
+					}
 				]
 			}
 		]
@@ -88,6 +94,22 @@ module.exports = {
 		new MiniCssExtractPlugin({ filename: 'css/[name].[contenthash:8].css' }) // 设置文件存放的位置和名称
 	],
 	resolve: {
-		extensions: ['.tsx', '.js', '.ts', '.less', '.css']
+		alias: {
+			// "@": ["../src"],
+			'@': path.resolve(__dirname, '../src/'),
+			src: path.resolve(__dirname, '../src/'),
+			components: path.resolve(__dirname, '../src/components'),
+			config: path.resolve(__dirname, '../src/config'),
+			hook: path.resolve(__dirname, '../src/hook'),
+			apis: path.resolve(__dirname, '../src/apis'),
+			router: path.resolve(__dirname, '../src/router'),
+			store: path.resolve(__dirname, '../src/store'),
+			theme: path.resolve(__dirname, '../src/theme'),
+			util: path.resolve(__dirname, '../src/util'),
+			i18n: path.resolve(__dirname, '../src/i18n'),
+			assets: path.resolve(__dirname, '../src/assets'),
+			views: path.resolve(__dirname, '../src/views')
+		},
+		extensions: ['.tsx', '.ts', '.wasm', '.mjs', '.js', '.json']
 	}
 };

@@ -7,6 +7,7 @@ export declare type RouteType = MutexType<
 		element: JSX.Element;
 		option?: any;
 		isLeaf?: boolean;
+		name?: string;
 	},
 	{
 		path: string;
@@ -14,6 +15,7 @@ export declare type RouteType = MutexType<
 		redirect: string;
 		option?: any;
 		isLeaf?: boolean;
+		name?: string;
 	}
 >;
 

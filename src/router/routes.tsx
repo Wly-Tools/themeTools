@@ -10,11 +10,13 @@ const routes: RoutersType = [
 	},
 	{
 		path: 'home',
-		element: <Home />
+		element: <Home />,
+		name: 'Home'
 	},
 	{
 		path: 'app',
 		element: <App />,
+		name: 'APP',
 		children: [
 			{
 				path: '',
@@ -22,7 +24,8 @@ const routes: RoutersType = [
 			},
 			{
 				path: 'home',
-				element: <Home />
+				element: <Home />,
+				name: 'HOME'
 			}
 		]
 	}
