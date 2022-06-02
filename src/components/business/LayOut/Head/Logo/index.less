@@ -7,15 +7,11 @@
 	}
 	.logo-text {
 		display: inline-block;
-		color: red;
 		font-weight: bolder;
-		background-image: -webkit-linear-gradient(
-			right,
-			rgb(0, 255, 51),
-			#034f56,
-			rgb(248, 248, 245)
-		);
+		background-image: @lo-hlog-backgroundImage;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
+		cursor: default;
+		user-select: none;
 	}
 }

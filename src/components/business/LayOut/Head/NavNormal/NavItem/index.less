@@ -1,9 +1,33 @@
 .nav-item {
-	padding: 0 8px;
-	height: calc(13vh - 10px);
-	line-height: calc(13vh - 10px);
+	// padding: 0 8px;
+	height: calc(@lo-head-height - 10px);
+	line-height: calc(@lo-head-height - 10px);
 	position: relative;
+	cursor: pointer;
+	user-select: none;
+	width: auto;
+	text-align: center;
+	padding: 0 10px;
+	.active {
+		color: @lo-hnava-color;
+	}
+	a {
+		color: @lo-hnav-color;
+		text-decoration: none;
+	}
+	.nav-item-nav {
+		height: 100%;
+		display: block;
+	}
+}
+.nav-item.nav-level2 {
+	background-color: @lo-hnav2-backgroundColor;
+	position: absolute;
+	height: auto;
+	left: 0;
+}
+.nav-item.nav-level1 {
 	&:not(:first-child) {
-		border-left: 1px solid red;
+		border-left: @lo-hnav-border;
 	}
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, FC } from 'react';
 import { routes } from 'src/router/routes';
 import NavItem from './NavItem';
 import './index.less';
-const NavNormal: React.FC<any> = (props) => {
+const NavNormal: FC<any> = (props) => {
 	return (
 		<>
 			<div className={'head-nav-nomal'}>
