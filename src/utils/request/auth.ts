@@ -1,4 +1,4 @@
-import { getCookie } from '@/libs/tools';
+import { getCookie } from '../tools/index';
 const unauthorized = function () {
 	const origin = window.location.origin;
 	if (process.env.NODE_ENV != 'development') {

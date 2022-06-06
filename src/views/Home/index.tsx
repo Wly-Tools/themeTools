@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { wlyNotiFiction } from 'wly-ui-react';
 const Home = () => {
 	return (
