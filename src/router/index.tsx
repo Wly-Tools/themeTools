@@ -22,6 +22,7 @@ const RootRoute = () => {
 	return (
 		<HashRouter>
 			<Routes>
+				<Route path='' element={<Navigate to={'layout'} replace />}></Route>
 				<Route path={'layout'} element={<LayOut />}>
 					{RouteDom}
 				</Route>

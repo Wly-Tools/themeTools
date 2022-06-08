@@ -61,13 +61,7 @@ module.exports = {
 					MiniCssExtractPlugin.loader, // 'style-loader',
 					'css-loader',
 					'postcss-loader',
-					'less-loader',
-					{
-						loader: 'style-resources-loader',
-						options: {
-							patterns: path.resolve(__dirname, '../src/theme/css/global.less')
-						}
-					}
+					'less-loader'
 				]
 			}
 		]

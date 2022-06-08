@@ -76,13 +76,7 @@ module.exports = {
 					{ loader: 'style-loader' },
 					{ loader: 'css-loader' },
 					{ loader: 'postcss-loader' },
-					{ loader: 'less-loader' },
-					{
-						loader: 'style-resources-loader',
-						options: {
-							patterns: path.resolve(__dirname, '../src/theme/css/global.less')
-						}
-					}
+					{ loader: 'less-loader' }
 				]
 			}
 		]

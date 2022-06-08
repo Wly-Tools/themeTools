@@ -1,5 +1,5 @@
 import React from 'react';
-import { wlyNotiFiction } from 'wly-ui-react';
+import { wlyNotiFiction, WlyInput, WlyButton } from 'wly-ui-react';
 const Home = () => {
 	return (
 		<div
@@ -10,6 +10,8 @@ const Home = () => {
 				});
 			}}>
 			home
+			<WlyInput />
+			<WlyButton>aaaaaa</WlyButton>
 		</div>
 	);
 };

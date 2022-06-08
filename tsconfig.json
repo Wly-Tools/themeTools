@@ -11,10 +11,14 @@
 			"strictNullChecks": true,
 			"moduleResolution": "node",
 			"baseUrl": "./",
-			"typeRoots": ["node_modules/@types"],
+			"typeRoots": [
+				"node_modules/@types"
+			],
 			"esModuleInterop": true
 		},
-		"exclude": ["node_modules"],
+		"exclude": [
+			"node_modules"
+		],
 		"include": [
 			"config/*"
 		]
@@ -30,11 +34,18 @@
 		"strictNullChecks": true,
 		"moduleResolution": "node",
 		"baseUrl": "./",
-		"typeRoots": ["node_modules/@types"],
+		"typeRoots": [
+			"node_modules/@types"
+		],
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"experimentalDecorators": true
 	},
-	"exclude": ["node_modules", "config/*"],
-	"include": ["src/*"]
+	"exclude": [
+		"node_modules",
+		"config/*"
+	],
+	"include": [
+		"src/**/*",
+	]
 }
