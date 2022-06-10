@@ -5,7 +5,7 @@ import { wlyNotiFiction } from 'wly-ui-react';
 const SUCCESS_CODE = 0;
 const interceptorsRules = {
 	request: {
-		onFulfilled: (req) => {
+		onFulfilled: (req: any) => {
 			if (process.env.NODE_ENV === 'development') {
 				const { Auth } = authorize();
 				req.headers['X-Request-Auth'] = Auth;
@@ -16,7 +16,7 @@ const interceptorsRules = {
 
 			return req;
 		},
-		onRejected: (error) => {
+		onRejected: (error: any) => {
 			Promise.reject(error);
 		}
 	},
@@ -31,7 +31,7 @@ const interceptorsRules = {
 			}
 			return cloneRes;
 		},
-		onRejected: (err) => {
+		onRejected: (err: { message?: any; status?: any }) => {
 			//parse response status. such as 401 500 302..
 			const { status } = err;
 			if (status === 401) {

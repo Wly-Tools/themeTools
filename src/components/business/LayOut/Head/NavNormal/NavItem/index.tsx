@@ -15,9 +15,7 @@ const NavItem: React.FC<any> = (props) => {
 					return (
 						<NavLink
 							to={`${route.path}/${item.path}`}
-							className={({ isActive }) =>
-								isActive ? 'nav-item-nav active' : 'nav-item-nav'
-							}
+							className={({ isActive }) => (isActive ? 'nav-item-nav active' : 'nav-item-nav')}
 							key={'level2' + item.path}>
 							{item.name}
 						</NavLink>
@@ -39,9 +37,7 @@ const NavItem: React.FC<any> = (props) => {
 			}}>
 			<NavLink
 				to={props.route.path}
-				className={({ isActive }) =>
-					isActive ? 'nav-item-nav active' : 'nav-item-nav'
-				}>
+				className={({ isActive }) => (isActive ? 'nav-item-nav active' : 'nav-item-nav')}>
 				{props.route.name}
 			</NavLink>
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import Home from '../views/Home';
 import { RoutersType } from '../types';
-import App from '../App';
+import App from '../views/APP';
+import { ThemeInfo } from 'src/views/APP/ThemeInfo';
+import { AttributeInfo } from 'src/views/APP/AttributeInfo';
 
 const routes: RoutersType = [
 	{
@@ -20,12 +22,17 @@ const routes: RoutersType = [
 		children: [
 			{
 				path: '',
-				redirect: 'home'
+				redirect: 'themeinfo'
 			},
 			{
-				path: 'home',
-				element: <Home />,
-				name: 'HOME'
+				path: 'themeinfo',
+				element: <ThemeInfo />,
+				name: 'THEMEINFO'
+			},
+			{
+				path: 'attributeinfo',
+				element: <AttributeInfo />,
+				name: 'ATTRIBUTEINFO'
 			}
 		]
 	}

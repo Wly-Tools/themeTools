@@ -117,7 +117,7 @@ module.exports = {
 		compress: true,
 		proxy: [
 			{
-				context: ['/pjServer', '/auth', '/config'],
+				context: ['/pjServer', '/auth', '/config', 'themeTool'],
 				target: 'http://127.0.0.1:3000',
 				changeOrigin: true,
 				secure: false
