@@ -1,7 +1,7 @@
 import { deepClone } from '../tools/index';
 import { authorize, unauthorized } from './auth';
 import { AxiosResponse } from 'axios';
-import { wlyNotiFiction } from 'wly-ui-react';
+import { WlyNotiFiction } from 'wlyUI';
 const SUCCESS_CODE = 0;
 const interceptorsRules = {
 	request: {
@@ -18,7 +18,7 @@ const interceptorsRules = {
 			if (cloneRes.data.code !== SUCCESS_CODE) {
 				let messages = cloneRes.data.messages.join(',');
 				let messagesType = cloneRes.data.messagesType;
-				wlyNotiFiction[messagesType]({ message: messages });
+				WlyNotiFiction[messagesType]({ message: messages });
 				return Promise.reject(cloneRes);
 			}
 			return cloneRes;
