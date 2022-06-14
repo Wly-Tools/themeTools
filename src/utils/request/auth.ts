@@ -2,10 +2,9 @@ import { getCookie } from '../tools/index';
 const unauthorized = function () {
 	const origin = window.location.origin;
 	if (process.env.NODE_ENV != 'development') {
-		window.location.href = `http://localhost:9001/login?return_url=${encodeURIComponent(
-			window.location.href
-		)}`;
+		window.location.href = `/login?return=${encodeURIComponent(window.location.pathname)}`;
 	}
+	window.location.href = `/login?return=${encodeURIComponent(window.location.pathname)}`;
 };
 const authorize = function (): { Auth: string } {
 	const authCookie = getCookie('X-Request_Auth');

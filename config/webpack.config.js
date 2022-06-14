@@ -9,7 +9,8 @@ module.exports = {
 	entry: path.resolve(__dirname, '../src/index.tsx'), // 文件的入口
 	output: {
 		filename: 'js/[name].[chunkhash:8].js', // 文件名
-		path: path.resolve(__dirname, '../dist') // 文件输出地址
+		path: path.resolve(__dirname, '../build'), // 文件输出地址
+		publicPath: '/build/'
 	},
 	module: {
 		rules: [
@@ -31,7 +32,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: 'assets/images/[name].[ext]' // 存放的位置： dist/assets/images/文件
+							name: 'assets/images/[name].[ext]' // 存放的位置： build/assets/images/文件
 						}
 					}
 				]
@@ -42,7 +43,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: 'assets/fonts/[name].[ext]' // 存放的位置： dist/assets/fonts/文件
+							name: 'assets/fonts/[name].[ext]' // 存放的位置： build/assets/fonts/文件
 						}
 					}
 				]

@@ -4,7 +4,7 @@ import { RoutersType } from '../types';
 import App from '../views/APP';
 import { ThemeInfo } from 'src/views/APP/ThemeInfo';
 import { AttributeInfo } from 'src/views/APP/AttributeInfo';
-
+// const Home = () => import('../views/Home');
 const routes: RoutersType = [
 	{
 		path: '',

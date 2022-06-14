@@ -6,14 +6,6 @@ const SUCCESS_CODE = 0;
 const interceptorsRules = {
 	request: {
 		onFulfilled: (req: any) => {
-			if (process.env.NODE_ENV === 'development') {
-				const { Auth } = authorize();
-				req.headers['X-Request-Auth'] = Auth;
-			}
-			if (!req.headers['Content-Type']) {
-				req.headers['Content-Type'] = 'application/json; charset=UTF-8';
-			}
-
 			return req;
 		},
 		onRejected: (error: any) => {
@@ -31,9 +23,10 @@ const interceptorsRules = {
 			}
 			return cloneRes;
 		},
-		onRejected: (err: { message?: any; status?: any }) => {
+		onRejected: (res) => {
 			//parse response status. such as 401 500 302..
-			const { status } = err;
+			const { status } = res.response;
+			// debugger;
 			if (status === 401) {
 				unauthorized();
 				return Promise.reject(status);
@@ -42,7 +35,7 @@ const interceptorsRules = {
 			// typeof statusApply === "function" && statusApply.call(null, statusText);
 			// hiddenLoadding();
 			// requestList.shift();
-			return Promise.reject(err.message);
+			return Promise.reject(res.message);
 		}
 	}
 };
