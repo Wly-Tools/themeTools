@@ -1,10 +1,10 @@
 import React from 'react';
-import { WlyNotiFiction, WlyInput, WlyButton } from 'wlyUI';
+import { wlyNotiFiction, WlyInput, WlyButton } from 'wlyUI';
 const Home = () => {
 	return (
 		<div
 			onClick={() => {
-				WlyNotiFiction['error']({
+				wlyNotiFiction['error']({
 					message: 'err',
 					duration: null
 				});
