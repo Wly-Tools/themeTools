@@ -1,0 +1,29 @@
+.searchTable {
+	width: 98%;
+	// background-color: #bfa;
+	margin: auto;
+	.top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.area-search {
+			display: flex;
+			flex: 0 0 auto;
+			height: 32px;
+		}
+		.area-operaction {
+			display: flex;
+			flex: 0 0 auto;
+			height: 32px;
+		}
+	}
+	.split-line {
+		height: 6px;
+		border-top: 1px solid var(--app-searchTable-splitLine-color);
+		margin: 5px 0px;
+	}
+	.area-table {
+		max-height: calc(100vh - var(--app-head-height) - 62px - 6px - 1px - 32px - 5px - 10px);
+		overflow: auto;
+	}
+}
