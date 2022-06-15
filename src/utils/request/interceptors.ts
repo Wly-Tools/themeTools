@@ -1,8 +1,9 @@
 import { deepClone } from '../tools/index';
 import { authorize, unauthorized } from './auth';
 import { AxiosResponse } from 'axios';
-import { WlyNotiFiction } from 'wlyUI';
+import { wlyNotiFiction } from 'wlyUI';
 const SUCCESS_CODE = 0;
+declare type MessageType = 'success' | 'error' | 'warning' | 'success' | 'info' | 'open';
 const interceptorsRules = {
 	request: {
 		onFulfilled: (req: any) => {
@@ -17,13 +18,13 @@ const interceptorsRules = {
 			const cloneRes = deepClone<AxiosResponse>(res);
 			if (cloneRes.data.code !== SUCCESS_CODE) {
 				let messages = cloneRes.data.messages.join(',');
-				let messagesType = cloneRes.data.messagesType;
-				WlyNotiFiction[messagesType]({ message: messages });
+				let messagesType: MessageType = cloneRes.data.messagesType;
+				wlyNotiFiction[messagesType]({ message: messages });
 				return Promise.reject(cloneRes);
 			}
 			return cloneRes;
 		},
-		onRejected: (res) => {
+		onRejected: (res: { response: { status: any }; message: any }) => {
 			//parse response status. such as 401 500 302..
 			const { status } = res.response;
 			// debugger;
