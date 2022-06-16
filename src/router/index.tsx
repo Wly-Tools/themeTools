@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { routes } from './routes';
 import { RoutersType, RouteType } from '../types';
 import LayOut from '../components/business/LayOut';
@@ -20,14 +20,15 @@ const renderRoutes = (routes: RoutersType) => {
 const RouteDom = renderRoutes(routes);
 const RootRoute = () => {
 	return (
-		<HashRouter>
+		<BrowserRouter basename='/tts'>
 			<Routes>
+				<Route path='' element={<Navigate to={'layout'} replace />}></Route>
 				<Route path={'layout'} element={<LayOut />}>
 					{RouteDom}
 				</Route>
 				{RouteDom}
 			</Routes>
-		</HashRouter>
+		</BrowserRouter>
 	);
 };
 export default RootRoute;

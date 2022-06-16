@@ -1,4 +1,3 @@
-declare module 'wly-ui-react';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.jpg';

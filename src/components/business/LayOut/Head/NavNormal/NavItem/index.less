@@ -1,18 +1,19 @@
 .nav-item {
 	// padding: 0 8px;
-	height: calc(@lo-head-height - 10px);
-	line-height: calc(@lo-head-height - 10px);
+	height: calc(var(--app-head-height) - 10px);
+	line-height: calc(var(--app-head-height) - 10px);
 	position: relative;
 	cursor: pointer;
 	user-select: none;
 	width: auto;
 	text-align: center;
 	padding: 0 10px;
+	z-index: 9999;
 	.active {
-		color: @lo-hnava-color;
+		color: var(--app-head-nav-active-color);
 	}
 	a {
-		color: @lo-hnav-color;
+		color: var(--app-head-nav-color);
 		text-decoration: none;
 	}
 	.nav-item-nav {
@@ -21,13 +22,13 @@
 	}
 }
 .nav-item.nav-level2 {
-	background-color: @lo-hnav2-backgroundColor;
+	background-color: var(--app-head-nav2-background-color);
 	position: absolute;
 	height: auto;
 	left: 0;
 }
 .nav-item.nav-level1 {
 	&:not(:first-child) {
-		border-left: @lo-hnav-border;
+		border-left: 1px solid var(--app-head-nav-border-color);
 	}
 }

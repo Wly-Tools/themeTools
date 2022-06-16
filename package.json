@@ -55,11 +55,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@ui/wly-ui-react": "^1.0.0",
-    "ant-design": "^1.0.0",
     "axios": "^0.27.2",
+    "default-passive-events": "^2.0.0",
     "react-router-dom": "6",
-    "sefon-ui": "^1.0.19",
-    "wly-ui-react": "^1.0.0"
+    "wlyUI": "^1.0.1"
   }
 }

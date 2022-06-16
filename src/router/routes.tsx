@@ -1,12 +1,13 @@
 import React from 'react';
 import Home from '../views/Home';
 import { RoutersType } from '../types';
-import App from '../App';
-
+import ColorField from '../views/ColorField/';
+import Themes from '../views/Themes/';
+// const Home = () => import('../views/Home');
 const routes: RoutersType = [
 	{
 		path: '',
-		redirect: 'app'
+		redirect: 'home'
 	},
 	{
 		path: 'home',
@@ -14,20 +15,14 @@ const routes: RoutersType = [
 		name: 'Home'
 	},
 	{
-		path: 'app',
-		element: <App />,
-		name: 'APP',
-		children: [
-			{
-				path: '',
-				redirect: 'home'
-			},
-			{
-				path: 'home',
-				element: <Home />,
-				name: 'HOME'
-			}
-		]
+		path: 'colorfield',
+		element: <ColorField />,
+		name: 'ColorField'
+	},
+	{
+		path: 'Themes',
+		element: <Themes />,
+		name: 'Themes'
 	}
 ];
 

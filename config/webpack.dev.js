@@ -9,7 +9,11 @@ module.exports = {
 	devtool: 'inline-source-map', //控制台调试代码
 	mode: 'development', // 修改为 development
 	entry: path.resolve(__dirname, '../src/index.tsx'),
-
+	output: {
+		filename: 'js/[name].[chunkhash:8].js', // 文件名
+		path: path.resolve(__dirname, '../dist'), // 文件输出地址
+		publicPath: '/dist/'
+	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
@@ -76,13 +80,7 @@ module.exports = {
 					{ loader: 'style-loader' },
 					{ loader: 'css-loader' },
 					{ loader: 'postcss-loader' },
-					{ loader: 'less-loader' },
-					{
-						loader: 'style-resources-loader',
-						options: {
-							patterns: path.resolve(__dirname, '../src/theme/css/global.less')
-						}
-					}
+					{ loader: 'less-loader' }
 				]
 			}
 		]
@@ -109,7 +107,11 @@ module.exports = {
 
 	devServer: {
 		// 新增webpack-dev-server 的配置
-		headers: { 'Access-Control-Allow-Origin': '*' },
+		// headers: { 'Access-Control-Allow-Origin': '*' },
+		historyApiFallback: {
+			index: '/dist/index.html',
+			disableDotRule: true
+		},
 		hot: true, // 热更新
 		open: {
 			app: {
@@ -123,7 +125,13 @@ module.exports = {
 		compress: true,
 		proxy: [
 			{
-				context: ['/pjServer', '/auth', '/config'],
+				context: ['/auth-center'],
+				target: 'http://127.0.0.1:8088/#',
+				changeOrigin: true,
+				secure: false
+			},
+			{
+				context: ['/pjServer', '/auth', '/config', '/themeTool', '/theme-tool', '/default'],
 				target: 'http://127.0.0.1:3000',
 				changeOrigin: true,
 				secure: false

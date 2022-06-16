@@ -100,4 +100,9 @@ function removeCookie(key, attributes) {
 		})
 	);
 }
-export { deepClone, setCookie, getCookie, removeCookie };
+function inintLocalStorage(config: any | {}) {
+	Object.keys(config).forEach((item) => {
+		window.localStorage.setItem(item, config[item]);
+	});
+}
+export { deepClone, setCookie, getCookie, removeCookie, inintLocalStorage };

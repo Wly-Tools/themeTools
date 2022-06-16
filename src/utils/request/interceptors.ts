@@ -1,22 +1,15 @@
 import { deepClone } from '../tools/index';
 import { authorize, unauthorized } from './auth';
 import { AxiosResponse } from 'axios';
-import { wlyNotiFiction } from 'wly-ui-react';
+import { wlyNotiFiction } from 'wlyUI';
 const SUCCESS_CODE = 0;
+declare type MessageType = 'success' | 'error' | 'warning' | 'success' | 'info' | 'open';
 const interceptorsRules = {
 	request: {
-		onFulfilled: (req) => {
-			if (process.env.NODE_ENV === 'development') {
-				const { Auth } = authorize();
-				req.headers['X-Request-Auth'] = Auth;
-			}
-			if (!req.headers['Content-Type']) {
-				req.headers['Content-Type'] = 'application/json; charset=UTF-8';
-			}
-
+		onFulfilled: (req: any) => {
 			return req;
 		},
-		onRejected: (error) => {
+		onRejected: (error: any) => {
 			Promise.reject(error);
 		}
 	},
@@ -25,15 +18,16 @@ const interceptorsRules = {
 			const cloneRes = deepClone<AxiosResponse>(res);
 			if (cloneRes.data.code !== SUCCESS_CODE) {
 				let messages = cloneRes.data.messages.join(',');
-				let messagesType = cloneRes.data.messagesType;
+				let messagesType: MessageType = cloneRes.data.messagesType;
 				wlyNotiFiction[messagesType]({ message: messages });
 				return Promise.reject(cloneRes);
 			}
 			return cloneRes;
 		},
-		onRejected: (err) => {
+		onRejected: (res: { response: { status: any }; message: any }) => {
 			//parse response status. such as 401 500 302..
-			const { status } = err;
+			const { status } = res.response;
+			// debugger;
 			if (status === 401) {
 				unauthorized();
 				return Promise.reject(status);
@@ -42,7 +36,7 @@ const interceptorsRules = {
 			// typeof statusApply === "function" && statusApply.call(null, statusText);
 			// hiddenLoadding();
 			// requestList.shift();
-			return Promise.reject(err.message);
+			return Promise.reject(res.message);
 		}
 	}
 };
