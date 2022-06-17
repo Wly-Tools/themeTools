@@ -16,7 +16,7 @@ const interceptorsRules = {
 	response: {
 		onFulfilled: (res: AxiosResponse) => {
 			const cloneRes = deepClone<AxiosResponse>(res);
-			if (cloneRes.data.code !== SUCCESS_CODE) {
+			if (cloneRes.data.code != SUCCESS_CODE) {
 				let messages = cloneRes.data.messages.join(',');
 				let messagesType: MessageType = cloneRes.data.messagesType;
 				wlyNotiFiction[messagesType]({ message: messages });

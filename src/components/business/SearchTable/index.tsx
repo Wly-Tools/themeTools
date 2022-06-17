@@ -4,7 +4,6 @@ import { WlyTable, WlyInput, WlyButton } from 'wlyUI';
 import './index.less';
 const SearchTable: FC<SeachTableType> = (props) => {
 	const [params, setParams] = useState<any>({});
-	const keyObj: any = {};
 	useEffect(() => {
 		props.searchInfo.forEach((item) => {
 			if (!params[item.key]) {
@@ -15,9 +14,8 @@ const SearchTable: FC<SeachTableType> = (props) => {
 			}
 		});
 	}, [props.searchInfo]);
-
 	const handelSearch = () => {
-		console.log(params);
+		props.searchApi(params);
 	};
 	return (
 		<div className='searchTable'>
@@ -38,6 +36,7 @@ const SearchTable: FC<SeachTableType> = (props) => {
 												[key]: e.target.value
 											}));
 										}}
+										onPressEnter={onEnter ? handelSearch : () => {}}
 										style={{ width: 256, height: 26, margin: '0 10px' }}
 									/>
 								);
