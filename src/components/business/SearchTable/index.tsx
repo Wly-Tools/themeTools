@@ -44,12 +44,14 @@ const SearchTable: FC<SeachTableType> = (props) => {
 						})}
 					<WlyButton onClick={handelSearch}>查询</WlyButton>
 				</div>
-				<div className='area-operaction'>
-					<WlyButton>新增</WlyButton>
-				</div>
+				{props?.add && (
+					<div className='area-operaction'>
+						<WlyButton>新增</WlyButton>
+					</div>
+				)}
 			</div>
 			<div className='split-line'></div>
-			<div className='area-table'>
+			<div className='area-table' style={{ maxHeight: props.maxHeight }}>
 				<WlyTable {...props.tableSetting} />
 			</div>
 		</div>

@@ -105,4 +105,13 @@ function inintLocalStorage(config: any | {}) {
 		window.localStorage.setItem(item, config[item]);
 	});
 }
-export { deepClone, setCookie, getCookie, removeCookie, inintLocalStorage };
+function FormLayout(labelCol?: number, wrapperCol?: number) {
+	const labelColSpan = labelCol ?? 7;
+	const wrapperColSpan = wrapperCol ?? 17;
+
+	return {
+		labelCol: { xs: { span: labelColSpan } },
+		wrapperCol: { xs: { span: wrapperColSpan } }
+	};
+}
+export { deepClone, setCookie, getCookie, removeCookie, inintLocalStorage, FormLayout };

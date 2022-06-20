@@ -4,7 +4,7 @@ import { WlyButton } from 'wlyUI';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const getColumns: (
-	usedApi: Function
+	usedApi?: Function
 ) => ColumnsType<{ id: string; name: string; value: string }> = (usedApi) => [
 	{
 		key: 'id',
@@ -54,40 +54,44 @@ const getColumns: (
 			return {};
 		}
 	},
-	{
-		key: 'id',
-		title: 'used',
-		width: '100px',
-		render(text, record) {
-			return (
-				<WlyButton
-					onClick={() => {
-						const title = 'used';
-						usedApi(record, title);
-					}}>
-					Look
-				</WlyButton>
-			);
-		}
-	},
-	{
-		key: 'id',
-		title: 'operate',
-		width: '100px',
-		render(text, record) {
-			return (
-				<div className='operacte'>
-					<WlyButton
-						className='edit'
-						icon={<EditOutlined />}
-						onClick={() => {
-							const title = 'edit';
-							usedApi(record, title);
-						}}></WlyButton>
-					<WlyButton className='delete' icon={<DeleteOutlined />}></WlyButton>
-				</div>
-			);
-		}
-	}
+	...(usedApi
+		? [
+				{
+					key: 'id',
+					title: 'used',
+					width: '100px',
+					render(text, record) {
+						return (
+							<WlyButton
+								onClick={() => {
+									const title = 'used';
+									usedApi(record, title);
+								}}>
+								Look
+							</WlyButton>
+						);
+					}
+				},
+				{
+					key: 'id',
+					title: 'operate',
+					width: '100px',
+					render(text, record) {
+						return (
+							<div className='operacte'>
+								<WlyButton
+									className='edit'
+									icon={<EditOutlined />}
+									onClick={() => {
+										const title = 'edit';
+										usedApi(record, title);
+									}}></WlyButton>
+								<WlyButton className='delete' icon={<DeleteOutlined />}></WlyButton>
+							</div>
+						);
+					}
+				}
+		  ]
+		: [])
 ];
 export { getColumns };

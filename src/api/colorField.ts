@@ -6,4 +6,26 @@ const qureyColorField = (params?: { id?: string; name?: string; value?: string }
 const getThemeInfoById = (params: { id: string }) => {
 	return request.get('/getThemeInfoById', { params });
 };
-export { qureyColorField, getThemeInfoById };
+const qureyThemeInfo = (params?: {
+	id?: string;
+	component?: string;
+	position?: string;
+	group?: string;
+	status?: string;
+	attribute?: string;
+}) => {
+	return request.get('/qureyThemeInfo', { params });
+};
+const updateColorField = (params: {
+	color: string;
+	usedIdLists: string[];
+	swapInfo: {
+		[key: string]: {
+			to: string;
+		};
+	};
+	id: string;
+}) => {
+	return request.post('/updateColorField', { ...params });
+};
+export { qureyColorField, getThemeInfoById, qureyThemeInfo, updateColorField };

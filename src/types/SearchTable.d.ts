@@ -13,6 +13,8 @@ interface SeachTableType {
 	searchInfo: SearchInfoType;
 	tableSetting: WlyTableProps<any>;
 	searchApi: (params?: any) => void;
+	add?: boolean;
+	maxHeight?: number | string;
 }
 
 export { searchType, SearchInfoItemType, SearchInfoType, SeachTableType };
