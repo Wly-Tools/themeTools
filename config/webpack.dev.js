@@ -131,7 +131,7 @@ module.exports = {
 				secure: false
 			},
 			{
-				context: ['/pjServer', '/auth', '/config', '/themeTool', '/theme-tool', '/default'],
+				context: ['/pjServer', '/auth', '/config', '/themetool', '/theme-tool', '/default'],
 				target: 'http://127.0.0.1:3000',
 				changeOrigin: true,
 				secure: false

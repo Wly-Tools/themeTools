@@ -35,7 +35,7 @@ module.exports = {
 		'max-len': ['error', { code: 120 }],
 		semi: 'off',
 		'@typescript-eslint/semi': ['error'],
-		'operator-linebreak': ['error', 'after'],
+		// 'operator-linebreak': ['error', 'before'],
 		'no-useless-constructor': ['off'],
 		'no-unused-vars': ['off'],
 		'linebreak-style': ['off'],
