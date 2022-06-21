@@ -14,47 +14,26 @@ import {
 import { getColumns } from './colums';
 import { UsedModal } from './Modal';
 import { EditModal } from './Modal';
-import { UsedTable } from './Modal/Used/usedTable';
-import { FormLayout } from 'src/utils/tools';
-import { SwapModal } from './Modal/Swap/SwapModal';
 import { AddModal } from './Modal/Add';
 import { DeleteModal } from './Modal/Delete';
+import { UsedTableDatasourceItemType } from './Modal/Used/UsedModal';
 const ColorField: FC<any> = (props) => {
 	const WlyTabPanel = WlyTabs.WlyTabPane;
-	const [usedTableDatasource, setUsedTableDatasource] = useState<
-		{ id?: string; component?: string; group?: string; status?: string; attribute?: string }[]
-	>([]);
-	const [themeInfoDatasouce, setThemeInfoDatasouce] = useState<
-		{ id?: string; component?: string; group?: string; status?: string; attribute?: string }[]
-	>([]);
+	const [usedTableDatasource, setUsedTableDatasource] = useState<UsedTableDatasourceItemType[]>([]);
+	const [themeInfoDatasouce, setThemeInfoDatasouce] = useState<UsedTableDatasourceItemType[]>([]);
 	const [usedIdLists, setUsedIdLists] = useState<string[]>([]);
-	const [operateId, setOperateId] = useState<string>('');
-	const [swapInfo, setswapInfo] = useState<{ [key: string]: { to: string } }>({});
 	const [record, setRecord] = useState({ id: '', name: '', value: '#ffffff' });
 	const [usedModalVisible, setUsedModalVisible] = useState(false);
 	const [editModalVisible, setEditModalVisible] = useState(false);
 	const [addVisible, setAddVisible] = useState(false);
-	const [swapVisible, setSwapVisible] = useState(false);
 	const [deleteVisible, setDeleteVisible] = useState(false);
-	const colorChange = (newColor: string) => {
-		setRecord((prev) => {
-			return { ...prev, value: newColor };
-		});
-	};
-	const [form] = WlyForm.useForm();
+
 	const searchInfo: SearchInfoType = [
 		{ key: 'id', type: 'input', prefix: 'id' },
 		{ key: 'name', type: 'input', prefix: 'name' },
 		{ key: 'value', type: 'input', onEnter: true, prefix: 'value' }
 	];
-	const editSearchInfo: SearchInfoType = [
-		{ key: 'id', type: 'input', prefix: 'id' },
-		{ key: 'component', type: 'input', prefix: 'component' },
-		{ key: 'group', type: 'input', onEnter: true, prefix: 'group' },
-		{ key: 'status', type: 'input', onEnter: true, prefix: 'status' },
-		{ key: 'status', type: 'input', onEnter: true, prefix: 'status' },
-		{ key: 'attribute', type: 'input', onEnter: true, prefix: 'attribute' }
-	];
+
 	const [modalTitle, setModalTitle] = useState<any>();
 	useEffect(() => {
 		searchApi();
@@ -117,15 +96,6 @@ const ColorField: FC<any> = (props) => {
 		setUsedIdLists(idLists);
 		qureyThemeInfo().then((res) => {
 			const resData = [...res.data.data];
-
-			// const setData = resData.map((item) => {
-			// 	if (idLists.includes(item.id)) {
-			// 		item.used = true;
-			// 	} else {
-			// 		item.used = false;
-			// 	}
-			// 	return item;
-			// });
 			setThemeInfoDatasouce(resData);
 		});
 	};
@@ -146,128 +116,49 @@ const ColorField: FC<any> = (props) => {
 				</WlyTabPanel>
 			</WlyTabs>
 			<UsedModal
-				title={modalTitle}
+				modalTitle={modalTitle}
 				visible={usedModalVisible}
-				onCancel={() => {
+				cancelFun={() => {
 					setUsedModalVisible(false);
 				}}
-				footer={false}>
-				<UsedTable dataSource={usedTableDatasource} />
-			</UsedModal>
+				usedTableDatasource={usedTableDatasource}
+			/>
 			<EditModal
-				destroyOnClose
-				title={modalTitle}
+				modalTitle={modalTitle}
 				visible={editModalVisible}
-				onCancel={() => {
+				cancelFun={() => {
 					setEditModalVisible(false);
 				}}
-				onOk={() => {
-					const params = {
-						color: record.value,
-						usedIdLists,
-						swapInfo,
-						id: record.id,
-						name: record.name
-					};
-
+				okFun={(params: {
+					color: string;
+					usedIdLists: string[];
+					swapInfo: { [key: string]: { to: string } };
+					id: string;
+					name: string;
+				}) => {
 					updateColorField(params).then((res) => {
 						if (res.data.code == 0) {
 							searchApi();
 							setEditModalVisible(false);
 						}
 					});
-				}}>
-				<WlyForm {...FormLayout(5)} form={form} layout='inline'>
-					<WlyFormItem name={'value'} label='value' initialValue={record.value}>
-						<WlyHexColorPicker
-							defaultColor={record.value}
-							color={record.value as string}
-							onChange={colorChange}
-						/>
-					</WlyFormItem>
-					<WlyFormItem name={'name'} label='name' initialValue={record.name}>
-						<WlyInput
-							value={record.name}
-							onChange={(e) => {
-								setRecord((prev) => {
-									return { ...prev, name: e.target.value };
-								});
-							}}
-						/>
-					</WlyFormItem>
-				</WlyForm>
-				<UsedTable
-					dataSource={themeInfoDatasouce}
-					searchInfo={editSearchInfo}
-					searchApi={(prarms: {
-						id?: string;
-						component?: string;
-						group?: string;
-						status?: string;
-						attribute?: string;
-					}) => {
-						qureyThemeInfo(prarms).then((res) => {
-							const resData = [...res.data.data];
-
-							setThemeInfoDatasouce(resData);
-						});
-					}}
-					operate={{
-						swap(id: string, to: string) {
-							setSwapVisible(true);
-							setOperateId(id);
-						},
-						add(id: string) {
-							setUsedIdLists((prev) => {
-								const setPrev = new Set(prev);
-								setPrev.add(id);
-								return Array.from(setPrev);
-							});
-						}
-					}}
-					usedLists={usedIdLists}
-				/>
-				<SwapModal
-					visible={swapVisible}
-					title={'ColorFileds-' + operateId}
-					onCancel={() => {
-						setSwapVisible(false);
-					}}
-					onOk={() => {
-						setUsedIdLists((prev) => {
-							const setPrev = new Set(prev);
-							console.log(operateId, record.id);
-
-							// debugger;
-							if (record.id === swapInfo[operateId]?.to || !swapInfo[operateId]?.to) {
-								return [...prev];
-							}
-							setPrev.delete(operateId);
-							return Array.from(setPrev);
-						});
-						setSwapVisible(false);
-					}}>
-					<SearchTable
-						searchInfo={searchInfo}
-						tableSetting={{
-							...tableSetting,
-							columns: getColumns(),
-							rowSelection: {
-								type: 'radio',
-								defaultSelectedRowKeys: [record.id],
-								onChange(selectedRowKeys: any) {
-									setswapInfo((prev) => {
-										return { ...prev, ...{ [operateId]: { to: selectedRowKeys } } };
-									});
-								}
-							}
-						}}
-						searchApi={searchApi}
-						add={false}
-						maxHeight={'400px'}
-					/>
-				</SwapModal>
-			</EditModal>
+				}}
+				record={record}
+				themeInfoDatasouce={themeInfoDatasouce}
+				setThemeInfoDatasouce={(data) => {
+					setThemeInfoDatasouce(data);
+				}}
+				usedIdLists={usedIdLists}
+				setUsedIdLists={(data) => {
+					setUsedIdLists(data);
+				}}
+				setAddUsedIdLists={(data) => {
+					setUsedIdLists((prev) => {
+						const setPrev = new Set(prev);
+						setPrev.add(data);
+						return Array.from(setPrev);
+					});
+				}}></EditModal>
 			<AddModal
 				visible={addVisible}
 				okFun={addColorField}

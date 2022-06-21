@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from '../views/Home';
 import { RoutersType } from '../types';
-import ColorField from '../views/ColorField/';
+import ColorField from '../views/ColorField';
 import Themes from '../views/Themes/';
 // const Home = () => import('../views/Home');
 const routes: RoutersType = [
