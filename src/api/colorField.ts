@@ -17,7 +17,7 @@ const qureyThemeInfo = (params?: {
 	return request.get('/qureyThemeInfo', { params });
 };
 const updateColorField = (params: {
-	color: string | undefined;
+	color: string;
 	usedIdLists: string[];
 	swapInfo: {
 		[key: string]: {
@@ -25,6 +25,7 @@ const updateColorField = (params: {
 		};
 	};
 	id: string;
+	name: string;
 }) => {
 	return request.post('/updateColorField', { ...params });
 };
