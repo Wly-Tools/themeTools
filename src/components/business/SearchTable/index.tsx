@@ -46,7 +46,7 @@ const SearchTable: FC<SeachTableType> = (props) => {
 				</div>
 				{props?.add && (
 					<div className='area-operaction'>
-						<WlyButton>新增</WlyButton>
+						<WlyButton onClick={props.addFun}>新增</WlyButton>
 					</div>
 				)}
 			</div>

@@ -17,7 +17,7 @@ const qureyThemeInfo = (params?: {
 	return request.get('/qureyThemeInfo', { params });
 };
 const updateColorField = (params: {
-	color: string;
+	color: string | undefined;
 	usedIdLists: string[];
 	swapInfo: {
 		[key: string]: {
@@ -28,4 +28,17 @@ const updateColorField = (params: {
 }) => {
 	return request.post('/updateColorField', { ...params });
 };
-export { qureyColorField, getThemeInfoById, qureyThemeInfo, updateColorField };
+const addColorField = (params: { value: string; name: string }) => {
+	return request.get('/addColorFiled', { params });
+};
+const deleteColorFiled = (params: { id: string }) => {
+	return request.get('/deleteColorFiled', { params });
+};
+export {
+	qureyColorField,
+	getThemeInfoById,
+	qureyThemeInfo,
+	updateColorField,
+	addColorField,
+	deleteColorFiled
+};

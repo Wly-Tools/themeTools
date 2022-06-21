@@ -15,6 +15,7 @@ interface SeachTableType {
 	searchApi: (params?: any) => void;
 	add?: boolean;
 	maxHeight?: number | string;
+	addFun?: () => any;
 }
 
 export { searchType, SearchInfoItemType, SearchInfoType, SeachTableType };

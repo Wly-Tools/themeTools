@@ -60,7 +60,7 @@ const getColumns: (
 					key: 'id',
 					title: 'used',
 					width: '100px',
-					render(text, record) {
+					render(_text: any, record: any) {
 						return (
 							<WlyButton
 								onClick={() => {
@@ -76,7 +76,7 @@ const getColumns: (
 					key: 'id',
 					title: 'operate',
 					width: '100px',
-					render(text, record) {
+					render(_text: any, record: any) {
 						return (
 							<div className='operacte'>
 								<WlyButton
@@ -86,7 +86,13 @@ const getColumns: (
 										const title = 'edit';
 										usedApi(record, title);
 									}}></WlyButton>
-								<WlyButton className='delete' icon={<DeleteOutlined />}></WlyButton>
+								<WlyButton
+									className='delete'
+									icon={<DeleteOutlined />}
+									onClick={() => {
+										const title = 'delete';
+										usedApi(record, title);
+									}}></WlyButton>
 							</div>
 						);
 					}

@@ -4,6 +4,8 @@ import { SearchInfoType } from 'src/types/';
 import { WlyTabs, WlyHexColorPicker, WlyForm, WlyFormItem, WlySelect } from 'wlyUI';
 import { WlyTableProps } from 'wlyUI/src/components/Types/WlyTable';
 import {
+	addColorField,
+	deleteColorFiled,
 	getThemeInfoById,
 	qureyColorField,
 	qureyThemeInfo,
@@ -15,6 +17,8 @@ import { EditModal } from './Modal/';
 import { UsedTable } from './Modal/Used/usedTable';
 import { FormLayout } from 'src/utils/tools';
 import { SwapModal } from './Modal/Swap/SwapModal';
+import { AddModal } from './Modal/Add';
+import { DeleteModal } from './Modal/Delete';
 const ColorField: FC<any> = (props) => {
 	const WlyTabPanel = WlyTabs.WlyTabPane;
 	const [usedModalVisible, setUsedModalVisible] = useState(false);
@@ -32,6 +36,9 @@ const ColorField: FC<any> = (props) => {
 	const [operateColorId, setOperateColorId] = useState<string>('');
 	const [swapVisible, setSwapVisible] = useState(false);
 	const [swapInfo, setswapInfo] = useState<{ [key: string]: { to: string } }>({});
+	const [addVisible, setAddVisible] = useState(false);
+	const [deleteVisible, setDeleteVisible] = useState(false);
+	const [record, setRecord] = useState({ id: '', name: '' });
 	const colorChange = (newColor: string) => {
 		setColor(newColor);
 	};
@@ -68,6 +75,10 @@ const ColorField: FC<any> = (props) => {
 					setColor(value);
 					initApi();
 					setEditModalVisible(true);
+				}
+				if (title === 'delete') {
+					setRecord({ id, name });
+					setDeleteVisible(true);
 				}
 			});
 			setModalTitle(
@@ -122,6 +133,7 @@ const ColorField: FC<any> = (props) => {
 			setThemeInfoDatasouce(resData);
 		});
 	};
+
 	return (
 		<div className='div-container'>
 			<WlyTabs defaultActiveKey='1'>
@@ -131,6 +143,9 @@ const ColorField: FC<any> = (props) => {
 						tableSetting={tableSetting}
 						searchApi={searchApi}
 						add={true}
+						addFun={() => {
+							setAddVisible(true);
+						}}
 					/>
 				</WlyTabPanel>
 			</WlyTabs>
@@ -241,6 +256,25 @@ const ColorField: FC<any> = (props) => {
 					/>
 				</SwapModal>
 			</EditModal>
+			<AddModal
+				visible={addVisible}
+				okFun={addColorField}
+				cancelFun={async () => {
+					await searchApi();
+					setAddVisible(false);
+				}}
+			/>
+			<DeleteModal
+				visible={deleteVisible}
+				okFunc={deleteColorFiled}
+				cancelFun={async (isOk?: boolean) => {
+					if (isOk) {
+						await searchApi();
+					}
+					setDeleteVisible(false);
+				}}
+				record={record}
+			/>
 		</div>
 	);
 };
