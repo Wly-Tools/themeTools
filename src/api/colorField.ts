@@ -26,13 +26,20 @@ const updateColorField = (params: {
 	};
 	id: string;
 	name: string;
+	theme: string;
+	platform: string;
 }) => {
 	return request.post('/updateColorField', { ...params });
 };
-const addColorField = (params: { value: string; name: string }) => {
+const addColorField = (params: {
+	value: string;
+	name: string;
+	theme: string;
+	platform: string;
+}) => {
 	return request.get('/addColorFiled', { params });
 };
-const deleteColorFiled = (params: { id: string }) => {
+const deleteColorFiled = (params: { id: string; theme: string; platform: string }) => {
 	return request.get('/deleteColorFiled', { params });
 };
 export {

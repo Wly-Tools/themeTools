@@ -114,4 +114,8 @@ function FormLayout(labelCol?: number, wrapperCol?: number) {
 		wrapperCol: { xs: { span: wrapperColSpan } }
 	};
 }
-export { deepClone, setCookie, getCookie, removeCookie, inintLocalStorage, FormLayout };
+const setCss = (key) => {
+	document.getElementById('globalhex').href = `/theme-tool/css/global${key}.css`;
+	document.getElementById('valueListhex').href = `/theme-tool/css/valueList${key}.css`;
+};
+export { deepClone, setCookie, getCookie, removeCookie, inintLocalStorage, FormLayout, setCss };

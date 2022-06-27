@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { FormLayout } from 'src/utils/tools';
+import { FormLayout, setCss } from 'src/utils/tools';
 import { WlyForm, WlyFormItem, WlyHexColorPicker, WlyInput, WlyModal } from 'wlyUI';
 interface AddProps {
 	okFun: (prarms?: any) => Promise<any>; //确定执行发发
@@ -13,8 +13,9 @@ const AddModal: FC<AddProps> = (props: any) => {
 	//确定方法
 	const handelOk = (prarms?: any) => {
 		form.validateFields().then((value) => {
-			props.okFun(prarms).then((res: { data: { code: number } }) => {
+			props.okFun(prarms).then((res: { data: { code: number; data: any } }) => {
 				if (res.data.code == 0) {
+					setCss(res.data.data);
 					props.cancelFun();
 				}
 			});
@@ -32,7 +33,7 @@ const AddModal: FC<AddProps> = (props: any) => {
 			title='Add'
 			onCancel={props.cancelFun}
 			onOk={() => {
-				handelOk(prarms);
+				handelOk({ ...prarms, theme: 'light', platform: 'theme-tool' });
 			}}
 			width='720px'>
 			<WlyForm form={form} {...FormLayout(3)} name='prarms'>

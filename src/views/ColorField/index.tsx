@@ -17,6 +17,7 @@ import { EditModal } from './Modal';
 import { AddModal } from './Modal/Add';
 import { DeleteModal } from './Modal/Delete';
 import { UsedTableDatasourceItemType } from './Modal/Used/UsedModal';
+import { setCss } from 'src/utils/tools';
 const ColorField: FC<any> = (props) => {
 	const WlyTabPanel = WlyTabs.WlyTabPane;
 	const [usedTableDatasource, setUsedTableDatasource] = useState<UsedTableDatasourceItemType[]>([]);
@@ -136,10 +137,11 @@ const ColorField: FC<any> = (props) => {
 					id: string;
 					name: string;
 				}) => {
-					updateColorField(params).then((res) => {
+					updateColorField({ ...params, theme: 'light', platform: 'theme-tool' }).then((res) => {
 						if (res.data.code == 0) {
 							searchApi();
 							setEditModalVisible(false);
+							setCss(res.data.data);
 						}
 					});
 				}}
